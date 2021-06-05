@@ -42,6 +42,7 @@ const RepositoriesList: React.FC = () => {
     const { data, error, loading } = useTypedSelector(
         state => state.repositories
     )
+    const { found } = useTypedSelector(state => state.alert)
     const classes = useStyles()
     const formSubmitHandler = (event: any) => {
         event.preventDefault()
@@ -49,8 +50,8 @@ const RepositoriesList: React.FC = () => {
         setTerm('')
     }
     useEffect(() => {
-        if (!loading && data.length === 0) setOpen(true)
-    }, [loading, data.length])
+        if (!found) setOpen(true)
+    }, [found])
     const handleClose = (event?: React.SyntheticEvent, reason?: string) => {
         if (reason === 'clickaway') {
             return
@@ -64,9 +65,14 @@ const RepositoriesList: React.FC = () => {
 
     return (
         <>
-            <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-                <Alert onClose={handleClose} severity='success'>
-                    This is a success message!
+            <Snackbar
+                open={open}
+                autoHideDuration={4000}
+                onClose={handleClose}
+                anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+            >
+                <Alert onClose={handleClose} severity='info'>
+                    Nothing was found
                 </Alert>
             </Snackbar>
 

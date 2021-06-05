@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles'
-import { Button, Link } from '@material-ui/core'
+import { Button, Link, Divider } from '@material-ui/core'
 import Accordion from '@material-ui/core/Accordion'
 import AccordionDetails from '@material-ui/core/AccordionDetails'
 import AccordionSummary from '@material-ui/core/AccordionSummary'
@@ -15,7 +15,7 @@ interface Props {
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         root: {
-            width: '100%',
+           
             margin: '25px',
         },
         heading: {
@@ -27,6 +27,11 @@ const useStyles = makeStyles((theme: Theme) =>
             fontSize: theme.typography.pxToRem(15),
             color: theme.palette.text.secondary,
         },
+        span: {
+            display: 'block',
+            width: '100%',
+            margin: '5px',
+        },
     })
 )
 
@@ -34,7 +39,6 @@ const RepositoryItem = ({ data }: Props) => {
     const classes = useStyles()
     const [expanded, setExpanded] = React.useState<string | false>(false)
     const [items, setItems] = useState<IRepository[]>([])
-    
 
     const handleChange =
         (panel: string) =>
@@ -46,7 +50,6 @@ const RepositoryItem = ({ data }: Props) => {
         if (data.length) {
             setItems(data.splice(0, 10))
         }
-      
     }, [data])
 
     function showMoreHandler() {
@@ -75,17 +78,40 @@ const RepositoryItem = ({ data }: Props) => {
                             </Typography>
                         </AccordionSummary>
                         <AccordionDetails>
-                            <Typography>
+                            <Typography
+                                variant='button'
+                                className={classes.span}
+                            >
                                 {item.links.npm ? (
-                                    <Link href={item.links.npm}>NPM</Link>
+                                    <>
+                                        <Link
+                                            className={classes.span}
+                                            href={item.links.npm}
+                                        >
+                                            NPM
+                                        </Link>{' '}
+                                        <Divider />
+                                    </>
                                 ) : null}
+
                                 {item.links.repository ? (
-                                    <Link href={item.links.repository}>
-                                        GitHub
-                                    </Link>
+                                    <>
+                                        {' '}
+                                        <Link
+                                            className={classes.span}
+                                            href={item.links.repository}
+                                        >
+                                            GitHub
+                                        </Link>{' '}
+                                        <Divider />
+                                    </>
                                 ) : null}
+
                                 {item.links.homepage ? (
-                                    <Link href={item.links.homepage}>
+                                    <Link
+                                        className={classes.span}
+                                        href={item.links.homepage}
+                                    >
                                         Homepage
                                     </Link>
                                 ) : null}

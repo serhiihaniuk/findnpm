@@ -2,6 +2,8 @@ import {
     SEARCH_REPOSITORIES,
     SEARCH_REPOSITORIES_ERROR,
     SEARCH_REPOSITORIES_SUCCESS,
+    FOUND_SUCESS,
+    FOUND_NOTHING,
 } from './../action-types/index'
 
 export interface IRepository {
@@ -43,3 +45,12 @@ export type Action =
     | SearchRepositoriesAction
     | SearchRepositoriesSuccessAction
     | SearchRepositoriesErrorAction
+
+interface FoundRePositoriesSuccess {
+    type: typeof FOUND_SUCESS
+}
+interface FoundRePositoriesError {
+    type: typeof FOUND_NOTHING
+}
+
+export type FoundAction = FoundRePositoriesError | FoundRePositoriesSuccess

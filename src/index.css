@@ -1,14 +1,9 @@
 body {
     margin: 0;
-    font-family: 'JetBrains Mono';
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
     text-align: center;
-    color: #eeeeee;
-    background-color: #393e46;
+    min-height: 100vh;
 }
 
-code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-        monospace;
+* {
+    box-sizing: border-box;
 }

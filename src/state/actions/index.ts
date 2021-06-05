@@ -1,10 +1,28 @@
-import { SEARCH_REPOSITORIES, SEARCH_REPOSITORIES_ERROR, SEARCH_REPOSITORIES_SUCCESS } from './../action-types/index';
+import {
+    SEARCH_REPOSITORIES,
+    SEARCH_REPOSITORIES_ERROR,
+    SEARCH_REPOSITORIES_SUCCESS,
+} from './../action-types/index'
 
+export interface IRepository {
+    name: string
+    scope: string
+    version: string
+    description: string
+    links: ILinksRepository
+    [key: string]: any
+}
 
+interface ILinksRepository {
+    npm?: string
+    homepage?: string
+    repository?: string
+    bugs?: string
+}
 export interface RepositoriesState {
     loading: boolean
     error: string | null
-    data: string[]
+    data: IRepository[]
 }
 
 interface SearchRepositoriesAction {
@@ -13,7 +31,7 @@ interface SearchRepositoriesAction {
 
 interface SearchRepositoriesSuccessAction {
     type: typeof SEARCH_REPOSITORIES_SUCCESS
-    payload: string[]
+    payload: IRepository[]
 }
 
 interface SearchRepositoriesErrorAction {
